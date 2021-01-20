@@ -61,13 +61,13 @@ export class FurnitureData
         this.canSitOn           = data.cansiton ? data.cansiton[0] === '1' : false;
         this.canLayOn           = data.canlayon ? data.canlayon[0] === '1' : false;
         this.colors             = colors;
-        this.name               = (data.description && data.name[0] || '');
+        this.name               = (data.name && data.name[0] || '');
         this.description        = (data.description && data.description[0] || '');
         this.adUrl              = (data.adurl && data.adurl[0] || '');
-        this.offerId            = data.offerid ? parseInt(data.offerid[0]) : 0;
+        this.offerId            = ((data.offerid && parseInt(data.offerid[0])) || 0);
         this.furniLine          = (data.furniline && data.furniline[0] || '');
         this.excludeDynamic     = data.excludeddynamic ? data.excludeddynamic[0] === '1' : false;
-        this.specialType        = data.specialtype ? parseInt(data.specialtype[0]) : 0;
+        this.specialType        = ((data.specialtype && parseInt(data.specialtype[0])) || 0);
         this.customParams       = (data.customparams && data.customparams[0] || '');
     }
 
