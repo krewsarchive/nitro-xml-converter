@@ -10,8 +10,6 @@ The converter currently supports the following files:
 - figuremap.xml
 - furnidata.xml
 - external_texts.txt
-- HabboRoomContent.xml
-- HabboRoomAssets.xml
 
 To convert one of these files, make sure you have an ``input`` directory, and place the files in it.
 

@@ -26,19 +26,25 @@ export class FurnitureData
 
         const colors: number[] = [];
 
-        const colorData = data.partcolors && data.partcolors[0].color;
-
-        if(colorData)
+        if(data.partcolors)
         {
-            for(let color of colorData)
+            for(let key in data.partcolors)
             {
-                if(color.charAt(0) === '#')
+                const colorData = data.partcolors[key].color;
+                
+                if(colorData)
                 {
-                    const code = color.replace('#', '');
-                    
-                    colors.push(parseInt(code, 16));
+                    for(let color of colorData)
+                    {
+                        if(color.charAt(0) === '#')
+                        {
+                            const code = color.replace('#', '');
+                            
+                            colors.push(parseInt(code, 16));
+                        }
+                        else colors.push(-(parseInt(color)));
+                    }
                 }
-                else colors.push(-(parseInt(color)));
             }
         }
 
@@ -55,14 +61,14 @@ export class FurnitureData
         this.canSitOn           = data.cansiton ? data.cansiton[0] === '1' : false;
         this.canLayOn           = data.canlayon ? data.canlayon[0] === '1' : false;
         this.colors             = colors;
-        this.name               = data.name[0];
-        this.description        = data.description[0];
-        this.adUrl              = data.adurl ? data.adurl[0] : null;
+        this.name               = (data.description && data.name[0] || '');
+        this.description        = (data.description && data.description[0] || '');
+        this.adUrl              = (data.adurl && data.adurl[0] || '');
         this.offerId            = data.offerid ? parseInt(data.offerid[0]) : 0;
-        this.furniLine          = data.furniline ? data.furniline[0] : null;
+        this.furniLine          = (data.furniline && data.furniline[0] || '');
         this.excludeDynamic     = data.excludeddynamic ? data.excludeddynamic[0] === '1' : false;
         this.specialType        = data.specialtype ? parseInt(data.specialtype[0]) : 0;
-        this.customParams       = data.customparams ? data.customparams[0] : null;
+        this.customParams       = (data.customparams && data.customparams[0] || '');
     }
 
     public toJSON()
