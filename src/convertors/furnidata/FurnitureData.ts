@@ -82,6 +82,7 @@ export class FurnitureData
         data.furniLine      = this.furniLine;
         data.offerId        = this.offerId;
         data.adUrl          = this.adUrl;
+        data.colors         = this.colors;
         data.excludeDynamic = this.excludeDynamic;
         data.specialType    = this.specialType;
         data.customParams   = this.customParams;
