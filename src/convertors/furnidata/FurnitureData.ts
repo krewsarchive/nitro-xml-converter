@@ -79,6 +79,7 @@ export class FurnitureData
         data.className      = this.className;
         data.name           = this.name;
         data.description    = this.description;
+        data.colors         = this.colors;
         data.furniLine      = this.furniLine;
         data.offerId        = this.offerId;
         data.adUrl          = this.adUrl;
