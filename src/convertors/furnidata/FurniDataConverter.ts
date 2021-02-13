@@ -78,9 +78,9 @@ export class FurniDataConverter extends Converter
 
     private generateJson(): void
     {
-        let output: any = {
-            floorItems: this._floorItems,
-            wallItems: this._wallItems
+        let output = {
+            roomitemtypes: this._floorItems,
+            wallitemtypes: this._wallItems
         };
         
         writeFile('output/FurnitureData.json', JSON.stringify(output), (err) =>
@@ -92,7 +92,7 @@ export class FurniDataConverter extends Converter
                 return;
             }
 
-            console.log(`Finished with ${ this._floorItems.length + this._wallItems.length } items in ${ Date.now() - this.startTime }ms`);
+            this.logger.log(`Finished with ${ this._floorItems.length + this._wallItems.length } items in ${ Date.now() - this.startTime }ms`);
         });
     }
 }

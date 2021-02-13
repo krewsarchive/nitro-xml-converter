@@ -1,17 +1,16 @@
 import { existsSync, readFile, writeFile } from 'fs';
 import { Converter } from '../../common/Converter';
+import { ProductData } from './ProductData';
 
 export class ProductDataConverter extends Converter
 {
-    private _productCount: number;
-    private _products: [string, string, string][] = [];
+    private _products: ProductData[];
 
     constructor()
     {
         super();
 
-        this._productCount  = 0;
-        this._products      = [];
+        this._products = [];
     }
 
     public convert(): void
@@ -67,16 +66,20 @@ export class ProductDataConverter extends Converter
                 const name          = pieces.shift();
                 const description   = pieces.join(',');
 
-                this._products.push([ productCode, name, description ]);
-
-                this._productCount++;
+                this._products.push(new ProductData(productCode, name, description));
             }
         }
     }
 
     public generateJson(): void
     {
-        writeFile('output/ProductData.json', JSON.stringify(this._products), (err) =>
+        let output = {
+            productdata: {
+                product: this._products
+            }
+        };
+
+        writeFile('output/ProductData.json', JSON.stringify(output), (err) =>
         {
             if(err)
             {
@@ -85,7 +88,7 @@ export class ProductDataConverter extends Converter
                 return;
             }
 
-            this.logger.log(`Finished with ${ this._productCount } items in ${ Date.now() - this.startTime }ms`);
+            this.logger.log(`Finished with ${ this._products.length } items in ${ Date.now() - this.startTime }ms`);
         });
     }
 }
