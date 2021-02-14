@@ -79,8 +79,12 @@ export class FurniDataConverter extends Converter
     private generateJson(): void
     {
         let output = {
-            roomitemtypes: this._floorItems,
-            wallitemtypes: this._wallItems
+            roomitemtypes: {
+                furnitype: this._floorItems
+            },
+            wallitemtypes: {
+                furnitype: this._wallItems
+            }
         };
         
         writeFile('output/FurnitureData.json', JSON.stringify(output), (err) =>
