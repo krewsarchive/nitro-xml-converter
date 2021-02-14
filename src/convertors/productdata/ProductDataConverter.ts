@@ -53,20 +53,23 @@ export class ProductDataConverter extends Converter
         {
             const set = part.match(/\[+?((.)*?)\]/g);
 
-            for(const entry of set)
+            if(set)
             {
-                let value = entry.replace(/\[{1,}/mg, '');
-                value = entry.replace(/\]{1,}/mg, '');
+                for(const entry of set)
+                {
+                    let value = entry.replace(/\[{1,}/mg, '');
+                    value = entry.replace(/\]{1,}/mg, '');
 
-                value = value.replace('[[', '');
-                value = value.replace('[', '');
+                    value = value.replace('[[', '');
+                    value = value.replace('[', '');
 
-                const pieces        = value.split(',');
-                const productCode   = pieces.shift();
-                const name          = pieces.shift();
-                const description   = pieces.join(',');
+                    const pieces        = value.split(',');
+                    const productCode   = pieces.shift();
+                    const name          = pieces.shift();
+                    const description   = pieces.join(',');
 
-                this._products.push(new ProductData(productCode, name, description));
+                    this._products.push(new ProductData(productCode, name, description));
+                }
             }
         }
     }
